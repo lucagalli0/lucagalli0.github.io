@@ -28,9 +28,8 @@ self.addEventListener('fetch', function(evt) {
 });
 
 function replayQueuedRequests() {
-    db.queue.each(function(req) 
-		fetch(req)
-        .then(function(response) {
+    db.queue.each(function(req) {
+		fetch(req).then(function(response) {
         if (response.status >= 500) {
             console.log('RESPONSE: error');
             return Response.error();
@@ -39,15 +38,12 @@ function replayQueuedRequests() {
         db.queue.delete(req);
     }).catch(function() {
         // if (time > expiration)
-        {
             db.queue.delete(req);
             console.log('DELETE: expired queue');
-        }
-    });
-)};
-	
+		});
+	});
+}	
 
-        //const delta = Date.now() - time;
 function queueFailedRequest(request) {
     // const req = {
     //     request: request.url,
