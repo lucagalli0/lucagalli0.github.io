@@ -28,9 +28,8 @@ self.addEventListener('fetch', function(evt) {
 });
 
 function replayQueuedRequests() {
-    db.queue.each(function(req){
-		fetch(req))
-        //const delta = Date.now() - time;
+    db.queue.each(function(req) 
+		fetch(req)
         .then(function(response) {
         if (response.status >= 500) {
             console.log('RESPONSE: error');
@@ -45,9 +44,10 @@ function replayQueuedRequests() {
             console.log('DELETE: expired queue');
         }
     });
-  }
+)};
+	
 
-
+        //const delta = Date.now() - time;
 function queueFailedRequest(request) {
     // const req = {
     //     request: request.url,
