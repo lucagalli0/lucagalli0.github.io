@@ -46,6 +46,7 @@ function replayQueuedRequests() {
         }
     });
   }
+}
 
 function queueFailedRequest(request) {
     // const req = {
