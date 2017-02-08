@@ -30,7 +30,7 @@ self.addEventListener('fetch', function(evt) {
 function replayQueuedRequests() {
     db.queue.each(function(req) {
 		fetch(req).then(function(response) {
-			console.log("Response:" {response})
+			console.log("Response:" {response});
 			if (response.status >= 500) {
 				console.log('RESPONSE: error');
 				return Response.error();
