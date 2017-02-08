@@ -30,9 +30,10 @@ self.addEventListener('fetch', function(evt) {
 function replayQueuedRequests() {
     db.queue.each(function(req) {
 		fetch(req).then(function(response) {
-        if (response.status >= 500) {
-            console.log('RESPONSE: error');
-            return Response.error();
+			console.log("Response:" {response})
+			if (response.status >= 500) {
+				console.log('RESPONSE: error');
+				return Response.error();
         }
         console.log('DELETE: queue');
         db.queue.delete(req);
@@ -49,6 +50,7 @@ function queueFailedRequest(request) {
     //     request: request.url,
     //     data: Date.now()
     // }
+	console.log(request);
     db.queue.add(request);
 	console.log('Qui si loggano i request falliti');
     console.log('QUEUED: failed request');
