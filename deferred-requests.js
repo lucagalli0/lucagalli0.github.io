@@ -45,12 +45,12 @@ function replayQueuedRequests() {
 }	
 
 function queueFailedRequest(request) {
-    // const req = {
-    //     request: request.url,
-    //     data: Date.now()
-    // }
-	console.log(request);
-    db.queue.add(request.body);
+    let req = {
+        request: request.body,
+		data: Date.now()
+    }
+	console.log(req);
+    db.queue.add(req);
 	console.log('Qui si loggano i request falliti');
     console.log('QUEUED: failed request');
 }
