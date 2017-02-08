@@ -29,7 +29,7 @@ self.addEventListener('fetch', function(evt) {
 
 function replayQueuedRequests() {
     db.queue.each(function(req){
-		fetch(req)
+		fetch(req))
         //const delta = Date.now() - time;
         .then(function(response) {
         if (response.status >= 500) {
@@ -46,7 +46,7 @@ function replayQueuedRequests() {
         }
     });
   }
-}
+
 
 function queueFailedRequest(request) {
     // const req = {
