@@ -50,7 +50,7 @@ function queueFailedRequest(request) {
     //     data: Date.now()
     // }
 	console.log(request);
-    db.queue.add(request);
+    db.queue.add(request.body);
 	console.log('Qui si loggano i request falliti');
     console.log('QUEUED: failed request');
 }
