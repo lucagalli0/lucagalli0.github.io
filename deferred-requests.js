@@ -46,7 +46,7 @@ function replayQueuedRequests() {
 
 function queueFailedRequest(request) {
     let req = {
-        request: request.body,
+        request: request.data,
 		data: Date.now()
     }
 	console.log(req);
