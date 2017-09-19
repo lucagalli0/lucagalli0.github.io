@@ -1,191 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Logo</title>
 </head>
-<body>
 
+<body>
   </div>
-  <div class="logo shine">
-    <span id="c" class="lightSpeedIn">C</span>
-    <span id="col">Columbus</span>
+  <div class="text shine">
+    <span class="lightSpeedIn c">C</span>
+    <span class="columbus">Columbus</span>
     <div class="underscores">
       <span class="under-green">___</span>
       <span> </span>
       <span class="under-blue">___</span>
     </div>
-    <span id="inf">Informatica</span>
+    <span class="informatica">Informatica</span>
   </div>
 
-<script>
-  const title = document.querySelector('.logo');
-  const text = title.querySelector('#c');
-  const walk = 40;
+  <script>
+    const title = document.querySelector('.text');
+    const text = title.querySelector('.c');
+    const walk = 40;
 
-  function shadow(e) {
-    const { offsetWidth: width, offsetHeight: height } = title;
-    let { offsetX: x, offsetY: y } = e;
+    function shadow(e) {
+      const { offsetWidth: width, offsetHeight: height } = title;
+      let { offsetX: x, offsetY: y } = e;
 
-    if (this !== e.target) {
-      x = x + e.target.offsetLeft;
-      y = y + e.target.offsetTop;
+      if (this !== e.target) {
+        x = x + e.target.offsetLeft;
+        y = y + e.target.offsetTop;
+      }
+
+      const xWalk = Math.round((x / width * walk) - (walk / 2));
+      const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+      text.style.textShadow = `rgba(10, 110, 100, 0.8) ${xWalk}px ${yWalk}px 0,
+                              rgba(10, 110, 100, 0.5) ${xWalk - 10}px ${yWalk}px 0px,
+                              rgba(10, 110, 100, 0.3) ${xWalk - 20}px ${yWalk}px 0px`;
     }
 
-    const xWalk = Math.round((x / width * walk) - (walk / 2));
-    const yWalk = Math.round((y / height * walk) - (walk / 2));
+    function reset() {
+      text.style.textShadow = `rgba(10, 110, 100, 0.7) -10px 0px 0px,
+                              rgba(10, 110, 100, 0.4)  -20px 0px 0px,
+                              rgba(10, 110, 100, 0.1)  -30px 0px 0px`;
+    }
 
-    text.style.textShadow = `rgba(10, 110, 100, 0.8) ${xWalk}px ${yWalk}px 0,
-                            rgba(10, 110, 100, 0.5) ${xWalk-10}px ${yWalk}px 0px,
-                            rgba(10, 110, 100, 0.3) ${xWalk-20}px ${yWalk}px 0px`;
-  }
-
-  function reset() {
-    text.style.textShadow = `rgba(10, 110, 100, 0.7) -10px 0px 0px,
-                            rgba(10, 110, 100, 0.4)  -20px 0px 0px,
-                            rgba(10, 110, 100, 0.1)  -30px 0px 0px`;
-  }
-
-  title.addEventListener('mousemove', shadow);
-  title.addEventListener('mouseout', reset);
-
-</script>
+    title.addEventListener('mousemove', shadow);
+    title.addEventListener('mouseout', reset);
+  </script>
 </body>
+
 </html>
 <style>
-
-html, body {
+  html,
+  body {
     height: 100%;
-}
-body {
+  }
+
+  body {
     margin: 0;
     overflow: hidden;
-}
+  }
 
-.logo {
-  position: relative;
-  height: 300px;
-  margin: 0 auto;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 64px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  width: 312px;
-  text-shadow: -10px 2px 1px rgba(0, 0, 0, 0.1);
-  color: rgba(0, 51, 160, 1);
-}
+  .text {
+    position: relative;
+    height: 300px;
+    margin: 0 auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 312px;
+    text-shadow: -10px 2px 1px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 51, 160, 1);
+  }
 
-#col {
-  transform: scale(0.7, 1.0);
-  text-align: center;
-  letter-spacing: 3px;
-}
+  .c {
+    transition: text-shadow .2s ease;
+    transform: scale(1.8, 2) rotate(-30deg) translate(-32px);
+    color: rgba(10, 110, 100, 1);
+    text-shadow: rgba(10, 110, 100, 0.7) -10px 0px 0px,
+      rgba(10, 110, 100, 0.4) -20px 0px 0px,
+      rgba(10, 110, 100, 0.1) -30px 0px 0px;
+  }
 
-.underscores {
-  margin-left: 20px;
-  margin-top: -50px;
-}
+  .columbus {
+    transform: scale(0.7, 1.0);
+    text-align: center;
+    letter-spacing: 3px;
+  }
 
-.under-green {
-  background: linear-gradient(to right, #0a6e64 0, #2b6d67 40%,#3d998f 80%,#fff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  .informatica {
+    transform: scale(0.7, 1.0);
+    text-align: center;
+    letter-spacing: -2px;
+  }
 
-.under-blue {
-  background: linear-gradient(to right, #fff 0, #517acc 40%,#3f5e9e 80%,#0033a0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  .underscores {
+    margin-left: 20px;
+    margin-top: -50px;
+  }
 
-#inf {
-  transform: scale(0.7, 1.0);
-  text-align: center;
-  letter-spacing: -2px; 
-}
+  .under-green {
+    background: linear-gradient(to right,
+      #0a6e64 0,
+      #2b6d67 40%,
+      #3d998f 80%,
+      #fff 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-#c {
-  transition: text-shadow .2s ease;
-  transform: scale(1.8,2) rotate(-30deg) translate(-32px);
-  color: rgba(10, 110, 100, 1);
-  text-shadow: rgba(10, 110, 100, 0.7) -10px 0px 0px,
-              rgba(10, 110, 100, 0.4)  -20px 0px 0px,
-              rgba(10, 110, 100, 0.1)  -30px 0px 0px;
-}
+  .under-blue {
+    background: linear-gradient(to right,
+      #fff 0,
+      #517acc 40%,
+      #3f5e9e 80%,
+      #0033a0 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-/* #c:hover {
-  animation-name: rotate; 
-  animation-duration: 4s; 
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  transform-origin: 10% 0;
-} */
+  .text:after {
+    content: "";
+    position: absolute;
+    top: -110%;
+    left: -210%;
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(30deg);
 
-/* @keyframes rotate {
-  from {transform: scale(1.8,2) rotateY(0deg);}
-  to {transform: scale(1.8,2) rotateY(360deg);}
-} */
-.logo:after {
-  content: "";
-  position: absolute;
-  top: -110%;
-  left: -210%;
-  width: 200%;
-  height: 200%;
-  opacity: 0;
-  transform: rotate(30deg);
-  
-  background: rgba(255, 255, 255, 0);
-  background: linear-gradient(
-    to right, 
-    rgba(255, 255, 255, 0.13) 0%,
-    rgba(255, 255, 255, 0.13) 77%,
-    rgba(255, 255, 255, 0.5) 92%,
-    rgba(255, 255, 255, 0.0) 100%
-  );
-}
+    background: rgba(255, 255, 255, 0);
+    background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.13) 0%,
+      rgba(255, 255, 255, 0.13) 77%,
+      rgba(255, 255, 255, 0.5) 92%,
+      rgba(255, 255, 255, 0.0) 100%);
+  }
 
-.logo:hover:after {
-  opacity: 1;
-  top: -30%;
-  left: -30%;
-  transition-property: left, top, opacity;
-  transition-duration: 0.7s, 0.7s, 0.15s;
-  transition-timing-function: ease;
-}
+  .text:hover:after {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+    transition-property: left, top, opacity;
+    transition-duration: 0.7s, 0.7s, 0.15s;
+    transition-timing-function: ease;
+  }
 
-.lightSpeedIn {
-  -webkit-animation-name: lightSpeedIn;
-  animation-name: lightSpeedIn;
-  -webkit-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+  .lightSpeedIn {
+    -webkit-animation-name: lightSpeedIn;
+    animation-name: lightSpeedIn;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
   }
 
   @keyframes lightSpeedIn {
-  0% {
-    transform: translate3d(100%, 0, 0) skewX(-30deg) rotate(-30deg) translate(60px, -50px) scale(1.8,2);
-    opacity: 0;
+    0% {
+      transform: translate3d(100%, 0, 0)skewX(-30deg) rotate(-30deg) translate(60px, -50px) scale(1.8, 2);
+      opacity: 0;
+    }
+    60% {
+      transform: skewX(20deg) rotate(-30deg) translate(60px, -50px) scale(1.8, 2);
+      opacity: 1;
+    }
+    80% {
+      transform: skewX(-5deg) rotate(-30deg) translate(60px, -50px) scale(1.8, 2);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(-30deg) translate(60px, -50px) scale(1.8, 2);
+      opacity: 1;
+    }
   }
-  60% {
-    transform: skewX(20deg) rotate(-30deg) translate(60px, -50px) scale(1.8,2);
-    opacity: 1;
-  }
-  80% {
-    transform: skewX(-5deg) rotate(-30deg) translate(60px, -50px) scale(1.8,2);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(-30deg) translate(60px, -50px) scale(1.8,2);
-    opacity: 1;
-  }
-} 
-
 </style>
