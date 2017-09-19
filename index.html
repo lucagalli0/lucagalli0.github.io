@@ -9,14 +9,17 @@
 </head>
 
 <body>
-  </div>
   <div class="text shine">
     <span class="lightSpeedIn c">C</span>
     <span class="columbus">Columbus</span>
-    <div class="underscores">
-      <span class="under-green">___</span>
+    <div style="display: flex">
+      <div class="underscores slideInLeft">
+        <span class="under-green">___</span>
+      </div>
       <span> </span>
-      <span class="under-blue">___</span>
+      <div class="underscores slideInRight">
+        <span class="under-blue">___</span>
+      </div>
     </div>
     <span class="informatica">Informatica</span>
   </div>
@@ -136,7 +139,6 @@
     height: 200%;
     opacity: 0;
     transform: rotate(30deg);
-
     background: rgba(255, 255, 255, 0);
     background: linear-gradient(to right,
       rgba(255, 255, 255, 0.13) 0%,
@@ -153,6 +155,48 @@
     transition-duration: 0.7s, 0.7s, 0.15s;
     transition-timing-function: ease;
   }
+
+  .slideInLeft {
+    -webkit-animation-name: slideInLeft;
+    animation-name: slideInLeft;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+      visibility: visible;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+
+  .slideInRight {
+    -webkit-animation-name: slideInRight;
+    animation-name: slideInRight;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes slideInRight {
+    0% {
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+      visibility: visible;
+  }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  } 
 
   .lightSpeedIn {
     -webkit-animation-name: lightSpeedIn;
