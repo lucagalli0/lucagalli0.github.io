@@ -53,7 +53,10 @@
     }
 
     title.addEventListener('mousemove', shadow);
+    title.addEventListener('touchmove', shadow);
     title.addEventListener('mouseout', reset);
+    title.addEventListener('touchend', reset);
+    
   </script>
 </body>
 
