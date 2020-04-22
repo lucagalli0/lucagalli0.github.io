@@ -51503,10 +51503,11 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95,
+      lineNumber: 60,
       columnNumber: 9
     }
   }, __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
+    id: "c3",
     d: "M26.6845 34.5945C22.5646 33.0513 19.0663 29.8725 17.1577 26.3773C14.1608 20.6858 13.2693 13.3333 17.1051 8.1388C20.4275 3.11513 24.493 3.21029 29.5925 3.30043C30.6268 3.22144 30.4639 0.711565 30.195 0.57709L30.7313 0.234985L36.1965 9.556L35.6116 9.86974C34.015 8.22795 32.4986 6.66053 30.5325 5.67544C26.7204 3.5013 21.9042 4.95923 19.4324 8.6621C17.5637 11.5516 17.8972 14.8311 18.5893 17.7265C19.817 21.763 21.232 25.5834 24.5461 28.6742C25.7837 29.9037 27.1125 30.8527 28.5325 31.521C29.9454 32.1763 31.2762 32.707 32.7247 32.7131C34.1861 32.712 35.8077 32.4251 37.1895 31.6523C40.2822 30.0216 41.4703 26.5754 41.3124 23.1841C41.1282 21.2754 41.0511 20.8866 40.8968 19.8504L42.6749 21.4321C43.2442 31.5421 35.6225 37.458 26.6845 34.5943L26.6845 34.5945Z",
     fill: "white",
     initial: {
@@ -51526,7 +51527,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 106,
+      lineNumber: 71,
       columnNumber: 11
     }
   }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
@@ -51549,7 +51550,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113,
+      lineNumber: 79,
       columnNumber: 11
     }
   }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
@@ -51572,7 +51573,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120,
+      lineNumber: 86,
       columnNumber: 11
     }
   }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
@@ -51595,7 +51596,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127,
+      lineNumber: 93,
       columnNumber: 11
     }
   }))), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
@@ -51605,7 +51606,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 136,
+      lineNumber: 102,
       columnNumber: 7
     }
   }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Heading"], {
@@ -51615,7 +51616,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137,
+      lineNumber: 103,
       columnNumber: 9
     }
   }, "Sempre un passo avanti"), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Text"], {
@@ -51625,7 +51626,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140,
+      lineNumber: 106,
       columnNumber: 9
     }
   }, "30 anni di esperienza al vostro servizio"), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -51642,7 +51643,7 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143,
+      lineNumber: 109,
       columnNumber: 9
     }
   }, "Contattaci")));
