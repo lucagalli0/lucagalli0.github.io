@@ -266,6 +266,39 @@ function _nonIterableRest() {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutProperties; });
+/* harmony import */ var _objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = Object(_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
 /*!*********************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
@@ -313,6 +346,30 @@ __webpack_require__.r(__webpack_exports__);
 
 function _slicedToArray(arr, i) {
   return Object(_arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__["default"])(arr, i) || Object(_unsupportedIterableToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(arr, i) || Object(_nonIterableRest__WEBPACK_IMPORTED_MODULE_3__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _taggedTemplateLiteral; });
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
 }
 
 /***/ }),
@@ -50664,11 +50721,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__N_SSG", function() { return __N_SSG; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/components/Description */ "./src/components/Description.js");
-/* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~/components/Footer */ "./src/components/Footer.js");
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~/components/Header */ "./src/components/Header.js");
-/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
-/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/components/Intro */ "./src/components/Intro.js");
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~/components/Header */ "./src/components/Header.js");
+/* harmony import */ var _components_home_Intro__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~/components/home/Intro */ "./src/components/home/Intro.js");
+/* harmony import */ var _components_home_Description__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/components/home/Description */ "./src/components/home/Description.js");
+/* harmony import */ var _components_home_InEvidenza__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/components/home/InEvidenza */ "./src/components/home/InEvidenza.js");
+/* harmony import */ var _components_home_News__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ~/components/home/News */ "./src/components/home/News.js");
+/* harmony import */ var _components_home_Offerte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ~/components/home/Offerte */ "./src/components/home/Offerte.js");
+/* harmony import */ var _components_home_Partners__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ~/components/home/Partners */ "./src/components/home/Partners.js");
+/* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ~/components/Footer */ "./src/components/Footer.js");
 var _this = undefined,
     _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\pages\\index.js";
 
@@ -50679,48 +50740,198 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
 
 
 
+
+
+
+
 var __N_SSG = true;
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var homepage = _ref.homepage;
-  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_4__["Box"], {
+  var homepage = _ref.homepage,
+      news = _ref.news,
+      offerte = _ref.offerte,
+      partnersImages = _ref.partnersImages;
+  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Stack"], {
     overflowX: "hidden",
+    spacing: 8,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20,
+      lineNumber: 36,
       columnNumber: 5
     }
-  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21,
+      lineNumber: 37,
       columnNumber: 7
     }
-  }), __jsx(_components_Intro__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), __jsx(_components_home_Intro__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22,
+      lineNumber: 38,
       columnNumber: 7
     }
-  }), __jsx(_components_Description__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    cards: homepage.cards,
+  }), __jsx(_components_home_Description__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    data: homepage.cards,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 39,
       columnNumber: 7
     }
-  }), __jsx(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), __jsx(_components_home_InEvidenza__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25,
+      lineNumber: 40,
+      columnNumber: 7
+    }
+  }), __jsx(_components_home_News__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    data: news,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41,
+      columnNumber: 7
+    }
+  }), __jsx(_components_home_Offerte__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    data: offerte,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42,
+      columnNumber: 7
+    }
+  }), __jsx(_components_home_Partners__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    images: partnersImages,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43,
+      columnNumber: 7
+    }
+  }), __jsx(_components_Footer__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44,
       columnNumber: 7
     }
   }));
 });
+
+/***/ }),
+
+/***/ "./src/components/BackgroundSlider/BackgroundSlider.js":
+/*!*************************************************************!*\
+  !*** ./src/components/BackgroundSlider/BackgroundSlider.js ***!
+  \*************************************************************/
+/*! exports provided: default, SliderItem */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BackgroundSlider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SliderItem", function() { return SliderItem; });
+/* harmony import */ var _babel_runtime_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/core */ "./node_modules/@emotion/core/dist/core.browser.esm.js");
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\BackgroundSlider\\BackgroundSlider.js";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+function _templateObject() {
+  var data = Object(_babel_runtime_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n\t0% { transform: translateX(0); }\n\t100% { transform: translateX(calc(-250px * ", "))}\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+/** @jsx jsx */
+
+
+
+function createKeyframes(numberOfElements) {
+  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(_templateObject(), numberOfElements);
+}
+
+function BackgroundSlider(_ref) {
+  var children = _ref.children,
+      numberOfElements = _ref.numberOfElements,
+      duration = _ref.duration;
+  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_2__["jsx"])(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Box"], {
+    overflow: "hidden",
+    position: "relative",
+    w: "100%",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14,
+      columnNumber: 5
+    }
+  }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_2__["jsx"])(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Box"], {
+    display: "flex",
+    css: {
+      animation: "".concat(createKeyframes(numberOfElements), " ").concat(duration, "s linear infinite")
+    },
+    w: 250 * numberOfElements * 2,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15,
+      columnNumber: 7
+    }
+  }, children, children));
+}
+function SliderItem(_ref2) {
+  var children = _ref2.children;
+  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_2__["jsx"])(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["PseudoBox"], {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "250px",
+    w: "250px",
+    transition: "all 0.2s ease",
+    css: {
+      filter: 'grayscale(1)'
+    },
+    opacity: "0.75",
+    _hover: {
+      filter: 'none',
+      opacity: 1,
+      transform: 'scale(1.05)'
+    },
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29,
+      columnNumber: 5
+    }
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./src/components/BackgroundSlider/index.js":
+/*!**************************************************!*\
+  !*** ./src/components/BackgroundSlider/index.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BackgroundSlider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BackgroundSlider */ "./src/components/BackgroundSlider/BackgroundSlider.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (_BackgroundSlider__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -50758,12 +50969,11 @@ function Card(_ref) {
       lineNumber: 7,
       columnNumber: 5
     }
-  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
+  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Flex"], {
     mb: 2,
-    display: "grid",
-    gridTemplateColumns: "1fr",
+    position: "relative",
     alignItems: "center",
-    justifyItems: "center",
+    justifyContent: "center",
     __self: this,
     __source: {
       fileName: _jsxFileName,
@@ -50771,24 +50981,23 @@ function Card(_ref) {
       columnNumber: 7
     }
   }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
+    position: "absolute",
+    left: "50%",
+    top: "50%",
     width: "4em",
     height: "5em",
-    gridRow: "1",
-    gridColumn: "1",
-    backgroundColor: "green.400",
-    transform: "skew(-20deg) rotate(-30deg)",
+    backgroundColor: "green.200",
+    transform: "translate(-50%, -50%) skew(-20deg) rotate(-30deg)",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10,
+      lineNumber: 9,
       columnNumber: 9
     }
   }), icon && __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
     name: icon,
     zIndex: "1",
     size: "6em",
-    gridRow: "1",
-    gridColumn: "1",
     color: "gray.700",
     __self: this,
     __source: {
@@ -50824,56 +51033,6 @@ function Card(_ref) {
 
 /***/ }),
 
-/***/ "./src/components/Description.js":
-/*!***************************************!*\
-  !*** ./src/components/Description.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Description; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
-/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Card */ "./src/components/Card.js");
-var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\Description.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
-
-
-
-var icons = ['ideas', 'structure', 'rent'];
-function Description(_ref) {
-  var _this = this;
-
-  var cards = _ref.cards;
-  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Flex"], {
-    wrap: "wrap",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9,
-      columnNumber: 5
-    }
-  }, cards.map(function (card, index) {
-    return __jsx(_Card__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      key: card.id,
-      card: card,
-      icon: icons[index],
-      index: index,
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 11,
-        columnNumber: 9
-      }
-    });
-  }));
-}
-
-/***/ }),
-
 /***/ "./src/components/Footer.js":
 /*!**********************************!*\
   !*** ./src/components/Footer.js ***!
@@ -50884,25 +51043,28 @@ function Description(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Footer; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+
 var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\Footer.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 
-function Footer() {
-  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+function Footer(props) {
+  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     py: 5,
     px: 2,
-    backgroundColor: "gray.800",
+    backgroundColor: "gray.800"
+  }, props, {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 6,
       columnNumber: 5
     }
-  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Text"], {
+  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Text"], {
     color: "gray.50",
     __self: this,
     __source: {
@@ -51241,7 +51403,7 @@ var MenuItems = function MenuItems(_ref) {
   }, children);
 };
 
-function Header() {
+function Header(props) {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__["useState"](false),
       _React$useState2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
       show = _React$useState2[0],
@@ -51382,38 +51544,238 @@ function Header() {
 
 /***/ }),
 
-/***/ "./src/components/Intro.js":
-/*!*********************************!*\
-  !*** ./src/components/Intro.js ***!
-  \*********************************/
+/***/ "./src/components/Section.js":
+/*!***********************************!*\
+  !*** ./src/components/Section.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Intro; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Section; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\Section.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
+
+
+function Section(_ref) {
+  var children = _ref.children,
+      props = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, ["children"]);
+
+  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Box"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    as: "section",
+    py: 4
+  }, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6,
+      columnNumber: 5
+    }
+  }), children);
+}
+
+/***/ }),
+
+/***/ "./src/components/SectionTitle.js":
+/*!****************************************!*\
+  !*** ./src/components/SectionTitle.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SectionTitle; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\SectionTitle.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
+
+
+function SectionTitle(_ref) {
+  var children = _ref.children,
+      props = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, ["children"]);
+
+  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["PseudoBox"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    as: "h2",
+    fontWeight: "bold",
+    fontSize: "1.2em",
+    position: "relative",
+    display: "inline-block",
+    mx: 4,
+    mb: 2,
+    _after: {
+      content: '""',
+      height: '0.75em',
+      width: '100%',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      margin: '0 auto',
+      backgroundColor: 'green.200',
+      zIndex: -1,
+      transform: 'skew(20deg) rotate(-6deg) translateX(-0.12em)'
+    },
+    textTransform: "uppercase",
+    zIndex: "1"
+  }, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6,
+      columnNumber: 5
+    }
+  }), children);
+}
+
+/***/ }),
+
+/***/ "./src/components/home/Description.js":
+/*!********************************************!*\
+  !*** ./src/components/home/Description.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Description; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Card */ "./src/components/Card.js");
+/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Section */ "./src/components/Section.js");
+
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\home\\Description.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
+
+
+
+var icons = ['ideas', 'structure', 'rent'];
+function Description(_ref) {
+  var _this = this;
+
+  var data = _ref.data,
+      props = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, ["data"]);
+
+  return __jsx(_Section__WEBPACK_IMPORTED_MODULE_4__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    display: "flex",
+    wrap: "wrap"
+  }, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 5
+    }
+  }), data.map(function (card, index) {
+    return __jsx(_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: card.id,
+      card: card,
+      icon: icons[index],
+      index: index,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11,
+        columnNumber: 9
+      }
+    });
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/components/home/InEvidenza.js":
+/*!*******************************************!*\
+  !*** ./src/components/home/InEvidenza.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return InEvidenza; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/framer-motion.es.js");
-var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\Intro.js";
+/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Section */ "./src/components/Section.js");
+/* harmony import */ var _SectionTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SectionTitle */ "./src/components/SectionTitle.js");
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\home\\InEvidenza.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
 
 
 
-function Intro() {
-  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
-    position: "relative",
-    height: "80vh",
-    display: "flex",
-    alignItems: "center",
+function InEvidenza() {
+  return __jsx(_Section__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7,
       columnNumber: 5
     }
-  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }, __jsx(_SectionTitle__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8,
+      columnNumber: 7
+    }
+  }, "In evidenza"));
+}
+
+/***/ }),
+
+/***/ "./src/components/home/Intro.js":
+/*!**************************************!*\
+  !*** ./src/components/home/Intro.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Intro; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/framer-motion.es.js");
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\home\\Intro.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
+
+
+
+function Intro(props) {
+  return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    position: "relative",
+    height: "80vh",
+    minHeight: "400px",
+    display: "flex",
+    alignItems: "center"
+  }, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7,
+      columnNumber: 5
+    }
+  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     width: "100%",
     height: "100%",
     position: "absolute",
@@ -51421,14 +51783,14 @@ function Intro() {
     left: "0px",
     transform: "skewY(-6deg)",
     transformOrigin: "0",
-    background: "linear-gradient(150deg,#2f855a 15%,#1e4e8c 70%,#153e75 95%)",
+    background: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='white' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\"), \n        linear-gradient(150deg,#2f855a 15%,#1e4e8c 70%,#153e75 95%)",
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8,
       columnNumber: 7
     }
-  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     as: "span",
     position: "absolute",
     opacity: "0.7",
@@ -51440,10 +51802,10 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18,
+      lineNumber: 19,
       columnNumber: 9
     }
-  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     as: "span",
     position: "absolute",
     opacity: "0.7",
@@ -51456,10 +51818,10 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 29,
       columnNumber: 9
     }
-  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     as: "span",
     position: "absolute",
     opacity: "0.7",
@@ -51472,10 +51834,10 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39,
+      lineNumber: 40,
       columnNumber: 9
     }
-  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     as: "span",
     position: "absolute",
     opacity: "0.7",
@@ -51487,10 +51849,10 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50,
+      lineNumber: 51,
       columnNumber: 9
     }
-  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     as: "svg",
     viewBox: "0 0 52 52",
     width: "50%",
@@ -51503,13 +51865,13 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60,
+      lineNumber: 61,
       columnNumber: 9
     }
-  }, __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
-    id: "c3",
+  }, __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].path, {
     d: "M26.6845 34.5945C22.5646 33.0513 19.0663 29.8725 17.1577 26.3773C14.1608 20.6858 13.2693 13.3333 17.1051 8.1388C20.4275 3.11513 24.493 3.21029 29.5925 3.30043C30.6268 3.22144 30.4639 0.711565 30.195 0.57709L30.7313 0.234985L36.1965 9.556L35.6116 9.86974C34.015 8.22795 32.4986 6.66053 30.5325 5.67544C26.7204 3.5013 21.9042 4.95923 19.4324 8.6621C17.5637 11.5516 17.8972 14.8311 18.5893 17.7265C19.817 21.763 21.232 25.5834 24.5461 28.6742C25.7837 29.9037 27.1125 30.8527 28.5325 31.521C29.9454 32.1763 31.2762 32.707 32.7247 32.7131C34.1861 32.712 35.8077 32.4251 37.1895 31.6523C40.2822 30.0216 41.4703 26.5754 41.3124 23.1841C41.1282 21.2754 41.0511 20.8866 40.8968 19.8504L42.6749 21.4321C43.2442 31.5421 35.6225 37.458 26.6845 34.5943L26.6845 34.5945Z",
     fill: "white",
+    transform: "translate(-12, 12)",
     initial: {
       opacity: 0,
       x: '-100%',
@@ -51527,12 +51889,13 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71,
+      lineNumber: 72,
       columnNumber: 11
     }
-  }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
+  }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].path, {
     d: "M26.6845 34.5945C22.5646 33.0513 19.0663 29.8725 17.1577 26.3773C14.1608 20.6858 13.2693 13.3333 17.1051 8.1388C20.4275 3.11513 24.493 3.21029 29.5925 3.30043C30.6268 3.22144 30.4639 0.711565 30.195 0.57709L30.7313 0.234985L36.1965 9.556L35.6116 9.86974C34.015 8.22795 32.4986 6.66053 30.5325 5.67544C26.7204 3.5013 21.9042 4.95923 19.4324 8.6621C17.5637 11.5516 17.8972 14.8311 18.5893 17.7265C19.817 21.763 21.232 25.5834 24.5461 28.6742C25.7837 29.9037 27.1125 30.8527 28.5325 31.521C29.9454 32.1763 31.2762 32.707 32.7247 32.7131C34.1861 32.712 35.8077 32.4251 37.1895 31.6523C40.2822 30.0216 41.4703 26.5754 41.3124 23.1841C41.1282 21.2754 41.0511 20.8866 40.8968 19.8504L42.6749 21.4321C43.2442 31.5421 35.6225 37.458 26.6845 34.5943L26.6845 34.5945Z",
     fill: "white",
+    transform: "translate(-8, 8)",
     initial: {
       opacity: 0,
       x: '-100%',
@@ -51550,12 +51913,13 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79,
+      lineNumber: 80,
       columnNumber: 11
     }
-  }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
+  }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].path, {
     d: "M26.6845 34.5945C22.5646 33.0513 19.0663 29.8725 17.1577 26.3773C14.1608 20.6858 13.2693 13.3333 17.1051 8.1388C20.4275 3.11513 24.493 3.21029 29.5925 3.30043C30.6268 3.22144 30.4639 0.711565 30.195 0.57709L30.7313 0.234985L36.1965 9.556L35.6116 9.86974C34.015 8.22795 32.4986 6.66053 30.5325 5.67544C26.7204 3.5013 21.9042 4.95923 19.4324 8.6621C17.5637 11.5516 17.8972 14.8311 18.5893 17.7265C19.817 21.763 21.232 25.5834 24.5461 28.6742C25.7837 29.9037 27.1125 30.8527 28.5325 31.521C29.9454 32.1763 31.2762 32.707 32.7247 32.7131C34.1861 32.712 35.8077 32.4251 37.1895 31.6523C40.2822 30.0216 41.4703 26.5754 41.3124 23.1841C41.1282 21.2754 41.0511 20.8866 40.8968 19.8504L42.6749 21.4321C43.2442 31.5421 35.6225 37.458 26.6845 34.5943L26.6845 34.5945Z",
     fill: "white",
+    transform: "translate(-4, 4)",
     initial: {
       opacity: 0,
       x: '-100%',
@@ -51573,10 +51937,10 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86,
+      lineNumber: 88,
       columnNumber: 11
     }
-  }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_2__["motion"].path, {
+  }), __jsx(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].path, {
     d: "M26.6845 34.5945C22.5646 33.0513 19.0663 29.8725 17.1577 26.3773C14.1608 20.6858 13.2693 13.3333 17.1051 8.1388C20.4275 3.11513 24.493 3.21029 29.5925 3.30043C30.6268 3.22144 30.4639 0.711565 30.195 0.57709L30.7313 0.234985L36.1965 9.556L35.6116 9.86974C34.015 8.22795 32.4986 6.66053 30.5325 5.67544C26.7204 3.5013 21.9042 4.95923 19.4324 8.6621C17.5637 11.5516 17.8972 14.8311 18.5893 17.7265C19.817 21.763 21.232 25.5834 24.5461 28.6742C25.7837 29.9037 27.1125 30.8527 28.5325 31.521C29.9454 32.1763 31.2762 32.707 32.7247 32.7131C34.1861 32.712 35.8077 32.4251 37.1895 31.6523C40.2822 30.0216 41.4703 26.5754 41.3124 23.1841C41.1282 21.2754 41.0511 20.8866 40.8968 19.8504L42.6749 21.4321C43.2442 31.5421 35.6225 37.458 26.6845 34.5943L26.6845 34.5945Z",
     fill: "white",
     initial: {
@@ -51596,41 +51960,41 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93,
+      lineNumber: 96,
       columnNumber: 11
     }
-  }))), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+  }))), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Box"], {
     py: 8,
     px: 4,
     zIndex: "1",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102,
+      lineNumber: 105,
       columnNumber: 7
     }
-  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Heading"], {
+  }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Heading"], {
     as: "h2",
     mb: 6,
     color: "white",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 103,
+      lineNumber: 106,
       columnNumber: 9
     }
-  }, "Sempre un passo avanti"), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Text"], {
+  }, "Sempre un passo avanti"), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Text"], {
     as: "p",
     color: "green.50",
     mb: "6",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 106,
+      lineNumber: 109,
       columnNumber: 9
     }
-  }, "30 anni di esperienza al vostro servizio"), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    backgroundColor: "blue.400",
+  }, "30 anni di esperienza al vostro servizio"), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    backgroundColor: "blue.500",
     color: "white",
     boxShadow: "0 4px 6px -1px rgba(66, 153, 225, 0.6), 0 2px 4px -1px rgba(66, 153, 225,0.06)",
     fontWeight: "bold",
@@ -51643,10 +52007,397 @@ function Intro() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109,
+      lineNumber: 112,
       columnNumber: 9
     }
   }, "Contattaci")));
+}
+
+/***/ }),
+
+/***/ "./src/components/home/News.js":
+/*!*************************************!*\
+  !*** ./src/components/home/News.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return News; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/utils */ "./src/utils/index.js");
+/* harmony import */ var _SectionTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SectionTitle */ "./src/components/SectionTitle.js");
+/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Section */ "./src/components/Section.js");
+
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\home\\News.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
+
+
+
+
+
+function News(_ref) {
+  var _this = this;
+
+  var data = _ref.data,
+      props = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, ["data"]);
+
+  return __jsx(_Section__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    bg: "gray.100"
+  }, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 5
+    }
+  }), __jsx(_SectionTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10,
+      columnNumber: 7
+    }
+  }, "News"), data.map(function (item) {
+    var description = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["nl2br"])(item.descrizione);
+    var date = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["formatDate"])(item.date);
+    return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Box"], {
+      p: 4,
+      key: item.date,
+      as: "article",
+      minHeight: "12em",
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16,
+        columnNumber: 11
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      fontSize: "sm",
+      color: "gray.500",
+      mb: 1,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17,
+        columnNumber: 13
+      }
+    }, date), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Flex"], {
+      justifyContent: "space-between",
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 20,
+        columnNumber: 13
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Heading"], {
+      size: "xs",
+      mb: 1,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 21,
+        columnNumber: 15
+      }
+    }, item.titolo)), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      fontSize: "sm",
+      dangerouslySetInnerHTML: {
+        __html: description
+      },
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25,
+        columnNumber: 13
+      }
+    }));
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/components/home/Offerte.js":
+/*!****************************************!*\
+  !*** ./src/components/home/Offerte.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Offerte; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/utils */ "./src/utils/index.js");
+/* harmony import */ var _SectionTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SectionTitle */ "./src/components/SectionTitle.js");
+/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Section */ "./src/components/Section.js");
+
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\home\\Offerte.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
+
+
+
+
+
+function Offerte(_ref) {
+  var _this = this;
+
+  var data = _ref.data,
+      props = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, ["data"]);
+
+  return __jsx(_Section__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 5
+    }
+  }), __jsx(_SectionTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10,
+      columnNumber: 7
+    }
+  }, "Offerte"), data.map(function (item) {
+    var description = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["nl2br"])(item.descrizione);
+    var scadenza = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["formatDate"])(item.scadenza);
+    return __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Box"], {
+      p: 4,
+      key: item.scadenza,
+      as: "article",
+      minHeight: "12em",
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16,
+        columnNumber: 11
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Flex"], {
+      justifyContent: "space-between",
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17,
+        columnNumber: 13
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Heading"], {
+      size: "xs",
+      mb: 1,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18,
+        columnNumber: 15
+      }
+    }, item.titolo), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Badge"], {
+      variantColor: "purple",
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 21,
+        columnNumber: 15
+      }
+    }, item.area)), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Flex"], {
+      borderRadius: "50%",
+      w: "92px",
+      h: "92px",
+      backgroundColor: "green.100",
+      align: "center",
+      justify: "center",
+      "float": "left",
+      m: 2,
+      style: {
+        shapeOutside: 'circle()'
+      },
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 23,
+        columnNumber: 13
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Image"], {
+      src: "http://www.columbusinformatica.it/images/partners/".concat(item.produttore.toLowerCase(), ".png"),
+      w: "92px",
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 34,
+        columnNumber: 15
+      }
+    })), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      fontSize: "sm",
+      dangerouslySetInnerHTML: {
+        __html: description
+      },
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39,
+        columnNumber: 13
+      }
+    }), __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      fontSize: "sm",
+      fontWeight: 100,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40,
+        columnNumber: 13
+      }
+    }, "Valida fino al ", scadenza));
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/components/home/Partners.js":
+/*!*****************************************!*\
+  !*** ./src/components/home/Partners.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Partners; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Section */ "./src/components/Section.js");
+/* harmony import */ var _BackgroundSlider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BackgroundSlider */ "./src/components/BackgroundSlider/index.js");
+/* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
+/* harmony import */ var _BackgroundSlider_BackgroundSlider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../BackgroundSlider/BackgroundSlider */ "./src/components/BackgroundSlider/BackgroundSlider.js");
+
+
+
+var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\src\\components\\home\\Partners.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3__["createElement"];
+
+
+
+
+
+function Partners(_ref) {
+  var _this = this;
+
+  var _ref$images = _ref.images,
+      images = _ref$images === void 0 ? [] : _ref$images,
+      props = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["images"]);
+
+  var _React$useMemo = react__WEBPACK_IMPORTED_MODULE_3__["useMemo"](function () {
+    return images.reduce(function (acc, curr, index) {
+      if (index % 2 === 0) acc[0].push(curr);else acc[1].push(curr);
+      return acc;
+    }, [[], []]);
+  }, [images]),
+      _React$useMemo2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useMemo, 2),
+      images1 = _React$useMemo2[0],
+      images2 = _React$useMemo2[1];
+
+  return __jsx(_Section__WEBPACK_IMPORTED_MODULE_4__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21,
+      columnNumber: 5
+    }
+  }), __jsx(_BackgroundSlider__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    numberOfElements: images1.length,
+    duration: 40,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22,
+      columnNumber: 7
+    }
+  }, images1.map(function (img) {
+    return __jsx(_BackgroundSlider_BackgroundSlider__WEBPACK_IMPORTED_MODULE_7__["SliderItem"], {
+      key: img,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 24,
+        columnNumber: 11
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_6__["Image"], {
+      src: "/images/partners/".concat(img),
+      alt: img.replace('png', ''),
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25,
+        columnNumber: 13
+      }
+    }));
+  })), __jsx(_BackgroundSlider__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    numberOfElements: images2.length,
+    duration: 50,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29,
+      columnNumber: 7
+    }
+  }, images2.map(function (img) {
+    return __jsx(_BackgroundSlider_BackgroundSlider__WEBPACK_IMPORTED_MODULE_7__["SliderItem"], {
+      key: img,
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 31,
+        columnNumber: 11
+      }
+    }, __jsx(_chakra_ui_core__WEBPACK_IMPORTED_MODULE_6__["Image"], {
+      src: "/images/partners/".concat(img),
+      alt: img.replace('png', ''),
+      __self: _this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 32,
+        columnNumber: 13
+      }
+    }));
+  })));
+}
+
+/***/ }),
+
+/***/ "./src/utils/index.js":
+/*!****************************!*\
+  !*** ./src/utils/index.js ***!
+  \****************************/
+/*! exports provided: nl2br, formatDate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nl2br", function() { return nl2br; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
+function nl2br(str, is_xhtml) {
+  var breakTag = is_xhtml || typeof is_xhtml === 'undefined' ? '<br />' : '<br>';
+  return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+function formatDate(input) {
+  var data = new Date(input);
+  var d = data.getDate().toString();
+  d = d.length > 1 ? d : '0' + d;
+  var m = (data.getMonth() + 1).toString();
+  m = m.length > 1 ? m : '0' + m;
+  var y = data.getFullYear();
+  return d + '/' + m + '/' + y;
 }
 
 /***/ }),
