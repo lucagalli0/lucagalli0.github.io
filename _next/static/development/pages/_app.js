@@ -608,7 +608,7 @@ function _unsupportedIterableToArray(o, minLen) {
   if (typeof o === "string") return arrayLikeToArray(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(n);
+  if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
 }
 
@@ -20621,9 +20621,13 @@ module.exports = copy;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "html,\r\nbody,\r\n#__next {\r\n  height: 100%;\r\n}\r\n", "",{"version":3,"sources":["C:/Users/lgalli/Desktop/WebApps/New Columbus/frontend/styles.css"],"names":[],"mappings":"AAAA;;;EAGE,YAAY;AACd","file":"styles.css","sourcesContent":["html,\r\nbody,\r\n#__next {\r\n  height: 100%;\r\n}\r\n"]}]);
+exports.push([module.i, "html,\r\nbody,\r\n#__next {\r\n  height: 100%;\r\n}\r\n", "",{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA;;;EAGE,YAAY;AACd","file":"styles.css","sourcesContent":["html,\r\nbody,\r\n#__next {\r\n  height: 100%;\r\n}\r\n"]}]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -20652,7 +20656,7 @@ module.exports = function (useSourceMap) {
       var content = cssWithMappingToString(item, useSourceMap);
 
       if (item[2]) {
-        return "@media ".concat(item[2], "{").concat(content, "}");
+        return "@media ".concat(item[2], " {").concat(content, "}");
       }
 
       return content;
@@ -20661,7 +20665,7 @@ module.exports = function (useSourceMap) {
   // eslint-disable-next-line func-names
 
 
-  list.i = function (modules, mediaQuery) {
+  list.i = function (modules, mediaQuery, dedupe) {
     if (typeof modules === 'string') {
       // eslint-disable-next-line no-param-reassign
       modules = [[null, modules, '']];
@@ -20669,30 +20673,34 @@ module.exports = function (useSourceMap) {
 
     var alreadyImportedModules = {};
 
-    for (var i = 0; i < this.length; i++) {
-      // eslint-disable-next-line prefer-destructuring
-      var id = this[i][0];
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
 
-      if (id != null) {
-        alreadyImportedModules[id] = true;
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
       }
     }
 
     for (var _i = 0; _i < modules.length; _i++) {
-      var item = modules[_i]; // skip already imported module
-      // this implementation is not 100% perfect for weird media query combinations
-      // when a module is imported multiple times with different media queries.
-      // I hope this will never occur (Hey this way we have smaller bundles)
+      var item = [].concat(modules[_i]);
 
-      if (item[0] == null || !alreadyImportedModules[item[0]]) {
-        if (mediaQuery && !item[2]) {
-          item[2] = mediaQuery;
-        } else if (mediaQuery) {
-          item[2] = "(".concat(item[2], ") and (").concat(mediaQuery, ")");
-        }
-
-        list.push(item);
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
       }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
     }
   };
 
@@ -20711,7 +20719,7 @@ function cssWithMappingToString(item, useSourceMap) {
   if (useSourceMap && typeof btoa === 'function') {
     var sourceMapping = toComment(cssMapping);
     var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot).concat(source, " */");
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
     });
     return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
   }
@@ -20995,7 +21003,7 @@ var findAutoFocused = function findAutoFocused(autoFocusables) {
 };
 
 var isGuard = function isGuard(node) {
-  return node.dataset && node.dataset.focusGuard;
+  return node && node.dataset && node.dataset.focusGuard;
 };
 var notAGuard = function notAGuard(node) {
   return !isGuard(node);
@@ -21005,6 +21013,7 @@ var newFocus = function newFocus(innerNodes, outerNodes, activeElement, lastNode
   var cnt = innerNodes.length;
   var firstFocus = innerNodes[0];
   var lastFocus = innerNodes[cnt - 1];
+  var isOnGuard = isGuard(activeElement);
 
   // focus is inside
   if (innerNodes.indexOf(activeElement) >= 0) {
@@ -21018,29 +21027,36 @@ var newFocus = function newFocus(innerNodes, outerNodes, activeElement, lastNode
   var firstNodeIndex = outerNodes.indexOf(firstFocus);
   var lastNodeIndex = outerNodes.indexOf(lastFocus);
 
+  var returnFirstNode = Object(_utils_firstFocus__WEBPACK_IMPORTED_MODULE_1__["pickFocusable"])(innerNodes, 0);
+  var returnLastNode = Object(_utils_firstFocus__WEBPACK_IMPORTED_MODULE_1__["pickFocusable"])(innerNodes, cnt - 1);
+
   // new focus
   if (activeIndex === -1 || lastNodeInside === -1) {
-    return innerNodes.indexOf(autoFocused.length ? Object(_utils_firstFocus__WEBPACK_IMPORTED_MODULE_1__["default"])(autoFocused) : Object(_utils_firstFocus__WEBPACK_IMPORTED_MODULE_1__["default"])(innerNodes));
+    return innerNodes.indexOf(autoFocused && autoFocused.length ? Object(_utils_firstFocus__WEBPACK_IMPORTED_MODULE_1__["default"])(autoFocused) : Object(_utils_firstFocus__WEBPACK_IMPORTED_MODULE_1__["default"])(innerNodes));
   }
   // old focus
   if (!indexDiff && lastNodeInside >= 0) {
     return lastNodeInside;
   }
   // first element
-  if (activeIndex <= firstNodeIndex && isGuard(activeElement) && Math.abs(indexDiff) > 1) {
-    return 0;
+  if (activeIndex <= firstNodeIndex && isOnGuard && Math.abs(indexDiff) > 1) {
+    return returnLastNode;
   }
-  // jump out
+  // last element
+  if (activeIndex >= firstNodeIndex && isOnGuard && Math.abs(indexDiff) > 1) {
+    return returnFirstNode;
+  }
+  // jump out, but not on the guard
   if (indexDiff && Math.abs(indexDiff) > 1) {
     return lastNodeInside;
   }
   // focus above lock
   if (activeIndex <= firstNodeIndex) {
-    return cnt - 1;
+    return returnLastNode;
   }
   // focus below lock
   if (activeIndex > lastNodeIndex) {
-    return 0;
+    return returnFirstNode;
   }
   // index is inside tab order, but outside Lock
   if (indexDiff) {
@@ -21442,11 +21458,12 @@ var asArray = function asArray(a) {
 /*!*****************************************************************!*\
   !*** ./node_modules/focus-lock/dist/es2015/utils/firstFocus.js ***!
   \*****************************************************************/
-/*! exports provided: default */
+/*! exports provided: pickFocusable, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pickFocusable", function() { return pickFocusable; });
 var isRadio = function isRadio(node) {
   return node.tagName === 'INPUT' && node.type === 'radio';
 };
@@ -21466,6 +21483,15 @@ var pickFirstFocus = function pickFirstFocus(nodes) {
     }
   }
   return nodes[0];
+};
+
+var pickFocusable = function pickFocusable(nodes, index) {
+  if (nodes.length > 1) {
+    if (isRadio(nodes[index]) && nodes[index].name) {
+      return nodes.indexOf(findSelectedRadio(nodes[index], nodes));
+    }
+  }
+  return index;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (pickFirstFocus);
@@ -21728,25 +21754,28 @@ module.exports = (__webpack_require__(/*! dll-reference dll_2adc2403d89adc16ead0
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js!./":
-/*!*********************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js ***!
-  \*********************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js&hotRouterUpdates=true!./":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js&hotRouterUpdates=true ***!
+  \*******************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/_app", function() {
-      var mod = __webpack_require__(/*! private-next-pages/_app.js */ "./pages/_app.js")
-      if(true) {
-        module.hot.accept(/*! private-next-pages/_app.js */ "./pages/_app.js", function() {
-          if(!next.router.components["/_app"]) return
-          var updatedPage = __webpack_require__(/*! private-next-pages/_app.js */ "./pages/_app.js")
-          next.router.update("/_app", updatedPage)
-        })
+    (window.__NEXT_P = window.__NEXT_P || []).push([
+      "/_app",
+      function () {
+        var mod = __webpack_require__(/*! private-next-pages/_app.js */ "./pages/_app.js");
+        if (true) {
+          module.hot.accept(/*! private-next-pages/_app.js */ "./pages/_app.js", function () {
+            if (!next.router.components["/_app"]) return;
+            var updatedPage = __webpack_require__(/*! private-next-pages/_app.js */ "./pages/_app.js");
+            next.router.update("/_app", updatedPage);
+          });
+        }
+        return mod;
       }
-      return mod
-    }]);
+    ]);
   
 
 /***/ }),
@@ -21765,7 +21794,7 @@ var _construct = __webpack_require__(/*! @babel/runtime/helpers/construct */ "./
 
 function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -22406,6 +22435,8 @@ function delBasePath(path) {
   return path.indexOf(basePath) === 0 ? path.substr(basePath.length) || '/' : path;
 }
 
+exports.delBasePath = delBasePath;
+
 function toRoute(path) {
   return path.replace(/\/$/, '') || '/';
 }
@@ -22419,8 +22450,8 @@ function fetchNextData(pathname, query, isServerRender, cb) {
 
   function getResponse() {
     return fetch(utils_1.formatWithValidation({
-      // @ts-ignore __NEXT_DATA__
-      pathname: "/_next/data/".concat(__NEXT_DATA__.buildId).concat(pathname, ".json"),
+      pathname: addBasePath( // @ts-ignore __NEXT_DATA__
+      "/_next/data/".concat(__NEXT_DATA__.buildId).concat(delBasePath(pathname), ".json")),
       query: query
     }), {
       // Cookies are required to be present for Next.js' SSG "Preview Mode".
@@ -22585,12 +22616,17 @@ var Router = /*#__PURE__*/function () {
     this.isFallback = isFallback;
 
     if (true) {
-      // in order for `e.state` to work on the `onpopstate` event
-      // we have to register the initial route upon initialization
-      this.changeState('replaceState', utils_1.formatWithValidation({
-        pathname: pathname,
-        query: query
-      }), as);
+      // make sure "as" doesn't start with double slashes or else it can
+      // throw an error as it's considered invalid
+      if (as.substr(0, 2) !== '//') {
+        // in order for `e.state` to work on the `onpopstate` event
+        // we have to register the initial route upon initialization
+        this.changeState('replaceState', utils_1.formatWithValidation({
+          pathname: pathname,
+          query: query
+        }), as);
+      }
+
       window.addEventListener('popstate', this.onPopState);
     }
   } // @deprecated backwards compatibility even though it's a private method.
@@ -23253,11 +23289,16 @@ exports.getRouteMatcher = getRouteMatcher;
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-});
+}); // this isn't importing the escape-string-regex module
+// to reduce bytes
+
+function escapeRegex(str) {
+  return str.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
+}
 
 function getRouteRegex(normalizedRoute) {
   // Escape all characters that could be considered RegEx
-  var escapedRoute = (normalizedRoute.replace(/\/$/, '') || '/').replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
+  var escapedRoute = escapeRegex(normalizedRoute.replace(/\/$/, '') || '/');
   var groups = {};
   var groupIndex = 1;
   var parameterizedRoute = escapedRoute.replace(/\/\\\[([^/]+?)\\\](?=\/|$)/g, function (_, $1) {
@@ -23270,10 +23311,17 @@ function getRouteRegex(normalizedRoute) {
     };
     return isCatchAll ? '/(.+?)' : '/([^/]+?)';
   });
-  return {
+  var namedParameterizedRoute; // dead code eliminate for browser since it's only needed
+  // while generating routes-manifest
+
+  if (false) {}
+
+  return Object.assign({
     re: new RegExp('^' + parameterizedRoute + '(?:/)?$', 'i'),
     groups: groups
-  };
+  }, namedParameterizedRoute ? {
+    namedRegex: "^".concat(namedParameterizedRoute, "(?:/)?$")
+  } : {});
 }
 
 exports.getRouteRegex = getRouteRegex;
@@ -23304,7 +23352,7 @@ var _getPrototypeOf = __webpack_require__(/*! @babel/runtime/helpers/getPrototyp
 
 var _toConsumableArray = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/next/node_modules/@babel/runtime/helpers/toConsumableArray.js");
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -28561,7 +28609,7 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
@@ -28573,7 +28621,7 @@ var AutoFocusInside = function AutoFocusInside(_ref) {
   var disabled = _ref.disabled,
       children = _ref.children,
       className = _ref.className;
-  return _react.default.createElement("div", (0, _extends2.default)({}, (0, _util.inlineProp)(constants.FOCUS_AUTO, !disabled), {
+  return React.createElement("div", (0, _extends2.default)({}, (0, _util.inlineProp)(constants.FOCUS_AUTO, !disabled), {
     className: className
   }), children);
 };
@@ -28602,6 +28650,8 @@ exports.default = _default;
 "use strict";
 
 
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 
 Object.defineProperty(exports, "__esModule", {
@@ -28613,7 +28663,7 @@ var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @
 
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _Lock = _interopRequireDefault(__webpack_require__(/*! ./Lock */ "./node_modules/react-focus-lock/dist/cjs/Lock.js"));
 
@@ -28627,8 +28677,8 @@ const RequireSideCar = (props) => {
   return <SideCar {...props} />;
 };
 */
-var FocusLockCombination = _react.default.forwardRef(function (props, ref) {
-  return _react.default.createElement(_Lock.default, (0, _extends2.default)({
+var FocusLockCombination = React.forwardRef(function (props, ref) {
+  return React.createElement(_Lock.default, (0, _extends2.default)({
     sideCar: _Trap.default,
     ref: ref
   }, props));
@@ -28656,12 +28706,14 @@ exports.default = _default;
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.hiddenGuard = void 0;
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
@@ -28678,12 +28730,12 @@ exports.hiddenGuard = hiddenGuard;
 
 var InFocusGuard = function InFocusGuard(_ref) {
   var children = _ref.children;
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
     key: "guard-first",
     "data-focus-guard": true,
     "data-focus-auto-guard": true,
     style: hiddenGuard
-  }), children, children && _react.default.createElement("div", {
+  }), children, children && React.createElement("div", {
     key: "guard-last",
     "data-focus-guard": true,
     "data-focus-auto-guard": true,
@@ -28723,7 +28775,7 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
@@ -28734,7 +28786,7 @@ var _util = __webpack_require__(/*! ./util */ "./node_modules/react-focus-lock/d
 var FreeFocusInside = function FreeFocusInside(_ref) {
   var children = _ref.children,
       className = _ref.className;
-  return _react.default.createElement("div", (0, _extends2.default)({}, (0, _util.inlineProp)(constants.FOCUS_ALLOW, true), {
+  return React.createElement("div", (0, _extends2.default)({}, (0, _util.inlineProp)(constants.FOCUS_ALLOW, true), {
     className: className
   }), children);
 };
@@ -28780,7 +28832,7 @@ var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/hel
 
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js"));
 
-var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 
@@ -28793,22 +28845,22 @@ var _FocusGuard = __webpack_require__(/*! ./FocusGuard */ "./node_modules/react-
 var _medium = __webpack_require__(/*! ./medium */ "./node_modules/react-focus-lock/dist/cjs/medium.js");
 
 var emptyArray = [];
-
-var FocusLock = _react.default.forwardRef(function (props, parentRef) {
+var FocusLock = React.forwardRef(function (props, parentRef) {
   var _objectSpread2;
 
-  var _useState = (0, _react.useState)(),
-      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
-      realObserved = _useState2[0],
-      setObserved = _useState2[1];
+  var _React$useState = React.useState(),
+      _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
+      realObserved = _React$useState2[0],
+      setObserved = _React$useState2[1];
 
-  var observed = (0, _react.useRef)();
-  var isActive = (0, _react.useRef)(false);
-  var originalFocusedElement = (0, _react.useRef)(null);
+  var observed = React.useRef();
+  var isActive = React.useRef(false);
+  var originalFocusedElement = React.useRef(null);
   var children = props.children,
       disabled = props.disabled,
       noFocusGuards = props.noFocusGuards,
       persistentFocus = props.persistentFocus,
+      crossFrame = props.crossFrame,
       autoFocus = props.autoFocus,
       allowTextSelection = props.allowTextSelection,
       group = props.group,
@@ -28825,12 +28877,12 @@ var FocusLock = _react.default.forwardRef(function (props, parentRef) {
       onActivationCallback = props.onActivation,
       onDeactivationCallback = props.onDeactivation;
 
-  var _useState3 = (0, _react.useState)({}),
-      _useState4 = (0, _slicedToArray2.default)(_useState3, 1),
-      id = _useState4[0]; // SIDE EFFECT CALLBACKS
+  var _React$useState3 = React.useState({}),
+      _React$useState4 = (0, _slicedToArray2.default)(_React$useState3, 1),
+      id = _React$useState4[0]; // SIDE EFFECT CALLBACKS
 
 
-  var onActivation = (0, _react.useCallback)(function () {
+  var onActivation = React.useCallback(function () {
     originalFocusedElement.current = originalFocusedElement.current || document && document.activeElement;
 
     if (observed.current && onActivationCallback) {
@@ -28839,14 +28891,14 @@ var FocusLock = _react.default.forwardRef(function (props, parentRef) {
 
     isActive.current = true;
   }, [onActivationCallback]);
-  var onDeactivation = (0, _react.useCallback)(function () {
+  var onDeactivation = React.useCallback(function () {
     isActive.current = false;
 
     if (onDeactivationCallback) {
       onDeactivationCallback(observed.current);
     }
   }, [onDeactivationCallback]);
-  var returnFocus = (0, _react.useCallback)(function (allowDefer) {
+  var returnFocus = React.useCallback(function (allowDefer) {
     var current = originalFocusedElement.current;
 
     if (Boolean(shouldReturnFocus) && current && current.focus) {
@@ -28865,7 +28917,7 @@ var FocusLock = _react.default.forwardRef(function (props, parentRef) {
     }
   }, [shouldReturnFocus]); // MEDIUM CALLBACKS
 
-  var onFocus = (0, _react.useCallback)(function (event) {
+  var onFocus = React.useCallback(function (event) {
     if (isActive.current) {
       _medium.mediumFocus.useMedium(event);
     }
@@ -28873,7 +28925,7 @@ var FocusLock = _react.default.forwardRef(function (props, parentRef) {
   var onBlur = _medium.mediumBlur.useMedium; // REF PROPAGATION
   // not using real refs due to race conditions
 
-  var setObserveNode = (0, _react.useCallback)(function (newObserved) {
+  var setObserveNode = React.useCallback(function (newObserved) {
     if (observed.current !== newObserved) {
       observed.current = newObserved;
       setObserved(newObserved);
@@ -28886,7 +28938,7 @@ var FocusLock = _react.default.forwardRef(function (props, parentRef) {
       console.warn('React-Focus-Lock: allowTextSelection is deprecated and enabled by default');
     }
 
-    _react.default.useEffect(function () {
+    React.useEffect(function () {
       if (!observed.current) {
         // eslint-disable-next-line no-console
         console.error('FocusLock: could not obtain ref to internal node');
@@ -28898,42 +28950,42 @@ var FocusLock = _react.default.forwardRef(function (props, parentRef) {
   var hasLeadingGuards = noFocusGuards !== true;
   var hasTailingGuards = hasLeadingGuards && noFocusGuards !== 'tail';
   var mergedRef = (0, _useCallbackRef.useMergeRefs)([parentRef, setObserveNode]);
-  return _react.default.createElement(_react.default.Fragment, null, hasLeadingGuards && [_react.default.createElement("div", {
+  return React.createElement(React.Fragment, null, hasLeadingGuards && [React.createElement("div", {
     key: "guard-first",
     "data-focus-guard": true,
     tabIndex: disabled ? -1 : 0,
     style: _FocusGuard.hiddenGuard
   }), // nearest focus guard
-  _react.default.createElement("div", {
+  React.createElement("div", {
     key: "guard-nearest",
     "data-focus-guard": true,
     tabIndex: disabled ? -1 : 1,
     style: _FocusGuard.hiddenGuard
-  })], !disabled && _react.default.createElement(SideCar, {
+  })], !disabled && React.createElement(SideCar, {
     id: id,
     sideCar: _medium.mediumSidecar,
     observed: realObserved,
     disabled: disabled,
     persistentFocus: persistentFocus,
+    crossFrame: crossFrame,
     autoFocus: autoFocus,
     whiteList: whiteList,
     shards: shards,
     onActivation: onActivation,
     onDeactivation: onDeactivation,
     returnFocus: returnFocus
-  }), _react.default.createElement(Container, (0, _extends2.default)({
+  }), React.createElement(Container, (0, _extends2.default)({
     ref: mergedRef
   }, lockProps, {
     className: className,
     onBlur: onBlur,
     onFocus: onFocus
-  }), children), hasTailingGuards && _react.default.createElement("div", {
+  }), children), hasTailingGuards && React.createElement("div", {
     "data-focus-guard": true,
     tabIndex: disabled ? -1 : 0,
     style: _FocusGuard.hiddenGuard
   }));
 });
-
 FocusLock.propTypes =  true ? {
   children: _propTypes.node,
   disabled: _propTypes.bool,
@@ -28942,6 +28994,7 @@ FocusLock.propTypes =  true ? {
   allowTextSelection: _propTypes.bool,
   autoFocus: _propTypes.bool,
   persistentFocus: _propTypes.bool,
+  crossFrame: _propTypes.bool,
   group: _propTypes.string,
   className: _propTypes.string,
   whiteList: _propTypes.func,
@@ -28959,6 +29012,7 @@ FocusLock.defaultProps = {
   noFocusGuards: false,
   autoFocus: true,
   persistentFocus: false,
+  crossFrame: true,
   allowTextSelection: undefined,
   group: undefined,
   className: undefined,
@@ -28995,7 +29049,7 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
@@ -29009,10 +29063,8 @@ function MoveFocusInside(_ref) {
   var isDisabled = _ref.disabled,
       className = _ref.className,
       children = _ref.children;
-
-  var ref = _react.default.useRef(null);
-
-  var disabled = _react.default.useRef(isDisabled);
+  var ref = React.useRef(null);
+  var disabled = React.useRef(isDisabled);
 
   var moveFocus = function moveFocus() {
     var observed = ref.current;
@@ -29026,12 +29078,11 @@ function MoveFocusInside(_ref) {
     });
   };
 
-  _react.default.useEffect(function () {
+  React.useEffect(function () {
     disabled.current = isDisabled;
     moveFocus();
   }, [isDisabled]);
-
-  return _react.default.createElement("div", (0, _extends2.default)({}, (0, _util.inlineProp)(constants.FOCUS_AUTO, !isDisabled), {
+  return React.createElement("div", (0, _extends2.default)({}, (0, _util.inlineProp)(constants.FOCUS_AUTO, !isDisabled), {
     ref: ref,
     className: className
   }), children);
@@ -29072,7 +29123,7 @@ exports.default = void 0;
 
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js"));
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
@@ -29148,6 +29199,16 @@ var extractRef = function extractRef(ref) {
   return ref && 'current' in ref ? ref.current : ref;
 };
 
+var focusWasOutside = function focusWasOutside(crossFrameOption) {
+  if (crossFrameOption) {
+    // with cross frame return true for any value
+    return Boolean(focusWasOutsideWindow);
+  } // in other case return only of focus went a while aho
+
+
+  return focusWasOutsideWindow === "meanwhile";
+};
+
 var activateTrap = function activateTrap() {
   var result = false;
 
@@ -29156,7 +29217,8 @@ var activateTrap = function activateTrap() {
         observed = _lastActiveTrap.observed,
         persistentFocus = _lastActiveTrap.persistentFocus,
         autoFocus = _lastActiveTrap.autoFocus,
-        shards = _lastActiveTrap.shards;
+        shards = _lastActiveTrap.shards,
+        crossFrame = _lastActiveTrap.crossFrame;
     var workingNode = observed || lastPortaledElement && lastPortaledElement.portaledElement;
     var activeElement = document && document.activeElement;
 
@@ -29164,7 +29226,7 @@ var activateTrap = function activateTrap() {
       var workingArea = [workingNode].concat((0, _toConsumableArray2.default)(shards.map(extractRef).filter(Boolean)));
 
       if (!activeElement || focusWhitelisted(activeElement)) {
-        if (persistentFocus || focusWasOutsideWindow || !isFreeFocus() || !lastActiveFocus && autoFocus) {
+        if (persistentFocus || focusWasOutside(crossFrame) || !isFreeFocus() || !lastActiveFocus && autoFocus) {
           if (workingNode && !((0, _focusLock.focusInside)(workingArea) || focusIsPortaledPair(activeElement, workingNode))) {
             if (document && !lastActiveFocus && activeElement && !autoFocus) {
               activeElement.blur();
@@ -29237,7 +29299,7 @@ var FocusWatcher = function FocusWatcher() {
 
 var FocusTrap = function FocusTrap(_ref4) {
   var children = _ref4.children;
-  return _react.default.createElement("div", {
+  return React.createElement("div", {
     onBlur: onBlur,
     onFocus: onFocus
   }, children);
@@ -29248,7 +29310,11 @@ FocusTrap.propTypes =  true ? {
 } : undefined;
 
 var onWindowBlur = function onWindowBlur() {
-  focusWasOutsideWindow = true;
+  focusWasOutsideWindow = "just"; // using setTimeout to set  this variable after React/sidecar reaction
+
+  setTimeout(function () {
+    focusWasOutsideWindow = "meanwhile";
+  }, 0);
 };
 
 var attachHandler = function attachHandler() {
@@ -34956,8 +35022,6 @@ swizzle.wrap = function (fn) {
 "use strict";
 
 
-var stylesInDom = {};
-
 var isOldIE = function isOldIE() {
   var memo;
   return function memorize() {
@@ -34998,80 +35062,69 @@ var getTarget = function getTarget() {
   };
 }();
 
-function listToStyles(list, options) {
-  var styles = [];
-  var newStyles = {};
+var stylesInDom = [];
+
+function getIndexByIdentifier(identifier) {
+  var result = -1;
+
+  for (var i = 0; i < stylesInDom.length; i++) {
+    if (stylesInDom[i].identifier === identifier) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+}
+
+function modulesToDom(list, options) {
+  var idCountMap = {};
+  var identifiers = [];
 
   for (var i = 0; i < list.length; i++) {
     var item = list[i];
     var id = options.base ? item[0] + options.base : item[0];
-    var css = item[1];
-    var media = item[2];
-    var sourceMap = item[3];
-    var part = {
-      css: css,
-      media: media,
-      sourceMap: sourceMap
+    var count = idCountMap[id] || 0;
+    var identifier = "".concat(id, " ").concat(count);
+    idCountMap[id] = count + 1;
+    var index = getIndexByIdentifier(identifier);
+    var obj = {
+      css: item[1],
+      media: item[2],
+      sourceMap: item[3]
     };
 
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = {
-        id: id,
-        parts: [part]
+    if (index !== -1) {
+      stylesInDom[index].references++;
+      stylesInDom[index].updater(obj);
+    } else {
+      stylesInDom.push({
+        identifier: identifier,
+        updater: addStyle(obj, options),
+        references: 1
       });
-    } else {
-      newStyles[id].parts.push(part);
     }
+
+    identifiers.push(identifier);
   }
 
-  return styles;
-}
-
-function addStylesToDom(styles, options) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i];
-    var domStyle = stylesInDom[item.id];
-    var j = 0;
-
-    if (domStyle) {
-      domStyle.refs++;
-
-      for (; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j]);
-      }
-
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j], options));
-      }
-    } else {
-      var parts = [];
-
-      for (; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j], options));
-      }
-
-      stylesInDom[item.id] = {
-        id: item.id,
-        refs: 1,
-        parts: parts
-      };
-    }
-  }
+  return identifiers;
 }
 
 function insertStyleElement(options) {
   var style = document.createElement('style');
+  var attributes = options.attributes || {};
 
-  if (typeof options.attributes.nonce === 'undefined') {
+  if (typeof attributes.nonce === 'undefined') {
     var nonce =  true ? __webpack_require__.nc : undefined;
 
     if (nonce) {
-      options.attributes.nonce = nonce;
+      attributes.nonce = nonce;
     }
   }
 
-  Object.keys(options.attributes).forEach(function (key) {
-    style.setAttribute(key, options.attributes[key]);
+  Object.keys(attributes).forEach(function (key) {
+    style.setAttribute(key, attributes[key]);
   });
 
   if (typeof options.insert === 'function') {
@@ -35109,7 +35162,7 @@ var replaceText = function replaceText() {
 }();
 
 function applyToSingletonTag(style, index, remove, obj) {
-  var css = remove ? '' : obj.css; // For old IE
+  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
 
   /* istanbul ignore if  */
 
@@ -35138,6 +35191,8 @@ function applyToTag(style, options, obj) {
 
   if (media) {
     style.setAttribute('media', media);
+  } else {
+    style.removeAttribute('media');
   }
 
   if (sourceMap && btoa) {
@@ -35195,45 +35250,43 @@ function addStyle(obj, options) {
 }
 
 module.exports = function (list, options) {
-  options = options || {};
-  options.attributes = typeof options.attributes === 'object' ? options.attributes : {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
   // tags it will allow on a page
 
   if (!options.singleton && typeof options.singleton !== 'boolean') {
     options.singleton = isOldIE();
   }
 
-  var styles = listToStyles(list, options);
-  addStylesToDom(styles, options);
+  list = list || [];
+  var lastIdentifiers = modulesToDom(list, options);
   return function update(newList) {
-    var mayRemove = [];
+    newList = newList || [];
 
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i];
-      var domStyle = stylesInDom[item.id];
+    if (Object.prototype.toString.call(newList) !== '[object Array]') {
+      return;
+    }
 
-      if (domStyle) {
-        domStyle.refs--;
-        mayRemove.push(domStyle);
+    for (var i = 0; i < lastIdentifiers.length; i++) {
+      var identifier = lastIdentifiers[i];
+      var index = getIndexByIdentifier(identifier);
+      stylesInDom[index].references--;
+    }
+
+    var newLastIdentifiers = modulesToDom(newList, options);
+
+    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
+      var _identifier = lastIdentifiers[_i];
+
+      var _index = getIndexByIdentifier(_identifier);
+
+      if (stylesInDom[_index].references === 0) {
+        stylesInDom[_index].updater();
+
+        stylesInDom.splice(_index, 1);
       }
     }
 
-    if (newList) {
-      var newStyles = listToStyles(newList, options);
-      addStylesToDom(newStyles, options);
-    }
-
-    for (var _i = 0; _i < mayRemove.length; _i++) {
-      var _domStyle = mayRemove[_i];
-
-      if (_domStyle.refs === 0) {
-        for (var j = 0; j < _domStyle.parts.length; j++) {
-          _domStyle.parts[j]();
-        }
-
-        delete stylesInDom[_domStyle.id];
-      }
-    }
+    lastIdentifiers = newLastIdentifiers;
   };
 };
 
@@ -36957,8 +37010,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _chakra_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/core */ "./node_modules/@chakra-ui/core/dist/es/index.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/theme */ "./src/theme.js");
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles.css */ "./styles.css");
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles.css */ "./styles.css");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_5__);
 
 var _jsxFileName = "C:\\Users\\lgalli\\Desktop\\WebApps\\New Columbus\\frontend\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
@@ -37205,13 +37258,16 @@ var customTheme = _objectSpread({}, _chakra_ui_core__WEBPACK_IMPORTED_MODULE_2__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(/*! !./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./styles.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./styles.css");
+var api = __webpack_require__(/*! ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./styles.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./styles.css");
 
-if (typeof content === 'string') {
-  content = [[module.i, content, '']];
-}
+            content = content.__esModule ? content.default : content;
 
-var options = {}
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
 
 options.insert = function(element){// These elements should always exist. If they do not,
 // this code should fail.
@@ -37230,43 +37286,75 @@ parentNode.insertBefore(element,anchorElement)// Remember: this is development o
 ;(self.requestAnimationFrame||setTimeout)(function(){for(var x=document.querySelectorAll('[data-next-hide-fouc]'),i=x.length;i--;){x[i].parentNode.removeChild(x[i]);}});};
 options.singleton = false;
 
-var update = __webpack_require__(/*! ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+var update = api(content, options);
 
-if (content.locals) {
-  module.exports = content.locals;
-}
 
 if (true) {
-  if (!content.locals) {
+  if (!content.locals || module.hot.invalidate) {
+    var isEqualLocals = function isEqualLocals(a, b) {
+  if (!a && b || a && !b) {
+    return false;
+  }
+
+  var p;
+
+  for (p in a) {
+    if (a[p] !== b[p]) {
+      return false;
+    }
+  }
+
+  for (p in b) {
+    if (!a[p]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+    var oldLocals = content.locals;
+
     module.hot.accept(
       /*! !./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./styles.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./styles.css",
       function () {
         var newContent = __webpack_require__(/*! !./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./styles.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./styles.css");
 
-        if (typeof newContent === 'string') {
-          newContent = [[module.i, newContent, '']];
-        }
-        
-        update(newContent);
+              newContent = newContent.__esModule ? newContent.default : newContent;
+
+              if (typeof newContent === 'string') {
+                newContent = [[module.i, newContent, '']];
+              }
+
+              if (!isEqualLocals(oldLocals, newContent.locals)) {
+                module.hot.invalidate();
+
+                return;
+              }
+
+              oldLocals = newContent.locals;
+
+              update(newContent);
       }
     )
   }
 
-  module.hot.dispose(function() { 
+  module.hot.dispose(function() {
     update();
   });
 }
 
+module.exports = content.locals || {};
+
 /***/ }),
 
 /***/ 0:
-/*!*******************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js ./node_modules/next/dist/client/router.js ***!
-  \*******************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js&hotRouterUpdates=true ./node_modules/next/dist/client/router.js ***!
+  \*****************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js!./");
+__webpack_require__(/*! next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js&hotRouterUpdates=true! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js&hotRouterUpdates=true!./");
 module.exports = __webpack_require__(/*! C:\Users\lgalli\Desktop\WebApps\New Columbus\frontend\node_modules\next\dist\client\router.js */"./node_modules/next/dist/client/router.js");
 
 
